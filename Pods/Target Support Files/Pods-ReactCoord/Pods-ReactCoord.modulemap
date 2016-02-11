@@ -1,0 +1,6 @@
+framework module Pods_ReactCoord {
+  umbrella header "Pods-ReactCoord-umbrella.h"
+
+  export *
+  module * { export * }
+}

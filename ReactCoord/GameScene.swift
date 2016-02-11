@@ -81,6 +81,7 @@ class GameScene: SKScene {
         
         startLabel.hidden = true
         
+        self.backgroundColor = UIColor.blueColor()
         
         let randomSecondDelay = Int(arc4random_uniform(UInt32(3)))+1
         
@@ -138,9 +139,11 @@ class GameScene: SKScene {
         if (!intersectsNode(self.sprite)) || reactionTimeResultsArr.count >= 20{
             
             if reactionTimeResultsArr.count >= 10 {
-                gameOverLabel.text = "Finished Test"
+//                gameOverLabel.text = "Finished Test"
                 
             }
+            
+//            self.view.le
             
             self.removeChildrenInArray([self.sprite])
             gameOverLabel.hidden = false
@@ -286,13 +289,6 @@ class GameScene: SKScene {
     
     func setupLabels(){
         // startLabel
-//        startLabel.text = "Tap to Start!"
-//        startLabel.fontColor = SKColor.blueColor()
-//        startLabel.fontSize = 70
-//        startLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
-//        startLabel.hidden = false
-//        self.addChild(startLabel)
-        
         yourTimeLabel.text = "Avg. Distance"
         yourTimeLabel.fontColor = SKColor.blackColor()
         yourTimeLabel.fontSize = 30

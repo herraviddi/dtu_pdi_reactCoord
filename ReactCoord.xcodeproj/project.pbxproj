@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1229D67B4758EEEA29315742 /* Pods_ReactCoord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD4D1F7B56425B60D6ED7C /* Pods_ReactCoord.framework */; };
 		7961938D1C6C98FF001127C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7961938C1C6C98FF001127C6 /* Assets.xcassets */; };
+		796193961C6CB77F001127C6 /* StartMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796193951C6CB77F001127C6 /* StartMenuScene.swift */; };
 		79DACCC61C6B9F5500C52F54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */; };
 		79DACCC81C6B9F5500C52F54 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 79DACCC71C6B9F5500C52F54 /* GameScene.sks */; };
 		79DACCCA1C6B9F5500C52F54 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DACCC91C6B9F5500C52F54 /* GameScene.swift */; };
@@ -17,7 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08DD4D1F7B56425B60D6ED7C /* Pods_ReactCoord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactCoord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7961938C1C6C98FF001127C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		796193951C6CB77F001127C6 /* StartMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartMenuScene.swift; sourceTree = "<group>"; };
 		79DACCC21C6B9F5500C52F54 /* ReactCoord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactCoord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79DACCC71C6B9F5500C52F54 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		79DACCCE1C6B9F5500C52F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79DACCD31C6B9F5500C52F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79DACCD51C6B9F5500C52F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2D3C1A42BE71BD50845C5B7 /* Pods-ReactCoord.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactCoord.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactCoord/Pods-ReactCoord.debug.xcconfig"; sourceTree = "<group>"; };
+		D8F2704C0CDCA8257B2091CA /* Pods-ReactCoord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactCoord.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactCoord/Pods-ReactCoord.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1229D67B4758EEEA29315742 /* Pods_ReactCoord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42B9A861379D10509798123C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2D3C1A42BE71BD50845C5B7 /* Pods-ReactCoord.debug.xcconfig */,
+				D8F2704C0CDCA8257B2091CA /* Pods-ReactCoord.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		796193941C6CB624001127C6 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				79DACCC71C6B9F5500C52F54 /* GameScene.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		79DACCB91C6B9F5500C52F54 = {
 			isa = PBXGroup;
 			children = (
 				79DACCC41C6B9F5500C52F54 /* ReactCoord */,
 				79DACCC31C6B9F5500C52F54 /* Products */,
+				42B9A861379D10509798123C /* Pods */,
+				D0436A439542F02060765D43 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +84,9 @@
 		79DACCC41C6B9F5500C52F54 /* ReactCoord */ = {
 			isa = PBXGroup;
 			children = (
+				796193941C6CB624001127C6 /* Scenes */,
 				79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */,
-				79DACCC71C6B9F5500C52F54 /* GameScene.sks */,
+				796193951C6CB77F001127C6 /* StartMenuScene.swift */,
 				79DACCC91C6B9F5500C52F54 /* GameScene.swift */,
 				79DACCCB1C6B9F5500C52F54 /* GameViewController.swift */,
 				79DACCCD1C6B9F5500C52F54 /* Main.storyboard */,
@@ -70,6 +97,14 @@
 			path = ReactCoord;
 			sourceTree = "<group>";
 		};
+		D0436A439542F02060765D43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08DD4D1F7B56425B60D6ED7C /* Pods_ReactCoord.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +112,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79DACCD81C6B9F5500C52F54 /* Build configuration list for PBXNativeTarget "ReactCoord" */;
 			buildPhases = (
+				B93306490DFD6CDCE8086146 /* Check Pods Manifest.lock */,
 				79DACCBE1C6B9F5500C52F54 /* Sources */,
 				79DACCBF1C6B9F5500C52F54 /* Frameworks */,
 				79DACCC01C6B9F5500C52F54 /* Resources */,
+				BA83E0EBBA43F8674C278F6A /* Embed Pods Frameworks */,
+				016C139982B85AF506AD63E6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -138,11 +176,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		016C139982B85AF506AD63E6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactCoord/Pods-ReactCoord-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B93306490DFD6CDCE8086146 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BA83E0EBBA43F8674C278F6A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactCoord/Pods-ReactCoord-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		79DACCBE1C6B9F5500C52F54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				796193961C6CB77F001127C6 /* StartMenuScene.swift in Sources */,
 				79DACCCA1C6B9F5500C52F54 /* GameScene.swift in Sources */,
 				79DACCCC1C6B9F5500C52F54 /* GameViewController.swift in Sources */,
 				79DACCC61C6B9F5500C52F54 /* AppDelegate.swift in Sources */,
@@ -254,6 +341,7 @@
 		};
 		79DACCD91C6B9F5500C52F54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2D3C1A42BE71BD50845C5B7 /* Pods-ReactCoord.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReactCoord/Info.plist;
@@ -266,6 +354,7 @@
 		};
 		79DACCDA1C6B9F5500C52F54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8F2704C0CDCA8257B2091CA /* Pods-ReactCoord.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReactCoord/Info.plist;
