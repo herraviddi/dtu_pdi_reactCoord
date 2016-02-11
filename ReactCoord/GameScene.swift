@@ -72,12 +72,12 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
-        if countOfAttempts == 0{
-            self.sprite.position = CGPointMake(frame.size.width/2, frame.size.height/2)
-            self.addChild(self.sprite)
-            countOfAttempts = 1
-            centerBall.hidden = false
-        }
+//        if countOfAttempts == 0{
+//            self.sprite.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+//            self.addChild(self.sprite)
+//            countOfAttempts = 1
+//            centerBall.hidden = false
+//        }
         
         startLabel.hidden = true
         
@@ -139,6 +139,7 @@ class GameScene: SKScene {
             
             if reactionTimeResultsArr.count >= 10 {
                 gameOverLabel.text = "Finished Test"
+                
             }
             
             self.removeChildrenInArray([self.sprite])
@@ -182,7 +183,11 @@ class GameScene: SKScene {
         let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
         sprite.runAction(SKAction.repeatActionForever(action))
         self.sprite.fillColor = colorArray[randomIndex()]
+        self.sprite.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        self.addChild(self.sprite)
+
         
+        centerBall.hidden = false
         
         if motionManager.accelerometerAvailable == true {
             // 2
@@ -281,12 +286,12 @@ class GameScene: SKScene {
     
     func setupLabels(){
         // startLabel
-        startLabel.text = "Tap to Start!"
-        startLabel.fontColor = SKColor.blueColor()
-        startLabel.fontSize = 70
-        startLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
-        startLabel.hidden = false
-        self.addChild(startLabel)
+//        startLabel.text = "Tap to Start!"
+//        startLabel.fontColor = SKColor.blueColor()
+//        startLabel.fontSize = 70
+//        startLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+//        startLabel.hidden = false
+//        self.addChild(startLabel)
         
         yourTimeLabel.text = "Avg. Distance"
         yourTimeLabel.fontColor = SKColor.blackColor()
