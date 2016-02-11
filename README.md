@@ -8,6 +8,8 @@ The Cognitive Aspect we chose to focus on was a persons reaction time together w
 9.feb - For fun the app prototype was implemented has a pure hack in iOS spritkit( first attempt in using spritekit, bare with me)
 
 
+[DISCLAIMER]
+This is my first try in creating/hacking together a spritekit "game",  there is a high probability that there are areas in the implementation that are not optimal, bare in mind that this project is meant as a quick implementation of a cognitive assessment app.
 
 
 
