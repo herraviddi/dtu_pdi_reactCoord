@@ -10,6 +10,10 @@
 		1229D67B4758EEEA29315742 /* Pods_ReactCoord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD4D1F7B56425B60D6ED7C /* Pods_ReactCoord.framework */; };
 		7961938D1C6C98FF001127C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7961938C1C6C98FF001127C6 /* Assets.xcassets */; };
 		796193961C6CB77F001127C6 /* StartMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796193951C6CB77F001127C6 /* StartMenuScene.swift */; };
+		79D112AD1C6DE5F800A40827 /* BeerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112AC1C6DE5F800A40827 /* BeerCounter.swift */; };
+		79D112AF1C6E051900A40827 /* CountInGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112AE1C6E051900A40827 /* CountInGameScene.swift */; };
+		79D112B11C6E096200A40827 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112B01C6E096200A40827 /* GameOverScene.swift */; };
+		79D112B31C6E126100A40827 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112B21C6E126100A40827 /* UserObject.swift */; };
 		79DACCC61C6B9F5500C52F54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */; };
 		79DACCC81C6B9F5500C52F54 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 79DACCC71C6B9F5500C52F54 /* GameScene.sks */; };
 		79DACCCA1C6B9F5500C52F54 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DACCC91C6B9F5500C52F54 /* GameScene.swift */; };
@@ -22,6 +26,13 @@
 		08DD4D1F7B56425B60D6ED7C /* Pods_ReactCoord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactCoord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7961938C1C6C98FF001127C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		796193951C6CB77F001127C6 /* StartMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartMenuScene.swift; sourceTree = "<group>"; };
+		7998D5A11C6CC7FE001E1104 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		79D112A81C6DD42C00A40827 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		79D112AA1C6DD44400A40827 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		79D112AC1C6DE5F800A40827 /* BeerCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerCounter.swift; sourceTree = "<group>"; };
+		79D112AE1C6E051900A40827 /* CountInGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountInGameScene.swift; sourceTree = "<group>"; };
+		79D112B01C6E096200A40827 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		79D112B21C6E126100A40827 /* UserObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
 		79DACCC21C6B9F5500C52F54 /* ReactCoord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactCoord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79DACCC71C6B9F5500C52F54 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -86,8 +97,12 @@
 			children = (
 				796193941C6CB624001127C6 /* Scenes */,
 				79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */,
+				79D112AE1C6E051900A40827 /* CountInGameScene.swift */,
 				796193951C6CB77F001127C6 /* StartMenuScene.swift */,
+				79D112AC1C6DE5F800A40827 /* BeerCounter.swift */,
+				79D112B21C6E126100A40827 /* UserObject.swift */,
 				79DACCC91C6B9F5500C52F54 /* GameScene.swift */,
+				79D112B01C6E096200A40827 /* GameOverScene.swift */,
 				79DACCCB1C6B9F5500C52F54 /* GameViewController.swift */,
 				79DACCCD1C6B9F5500C52F54 /* Main.storyboard */,
 				79DACCD21C6B9F5500C52F54 /* LaunchScreen.storyboard */,
@@ -100,6 +115,9 @@
 		D0436A439542F02060765D43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79D112AA1C6DD44400A40827 /* SwiftyJSON.framework */,
+				79D112A81C6DD42C00A40827 /* SwiftyJSON.framework */,
+				7998D5A11C6CC7FE001E1104 /* Alamofire.framework */,
 				08DD4D1F7B56425B60D6ED7C /* Pods_ReactCoord.framework */,
 			);
 			name = Frameworks;
@@ -230,7 +248,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				796193961C6CB77F001127C6 /* StartMenuScene.swift in Sources */,
+				79D112B31C6E126100A40827 /* UserObject.swift in Sources */,
+				79D112AF1C6E051900A40827 /* CountInGameScene.swift in Sources */,
+				79D112B11C6E096200A40827 /* GameOverScene.swift in Sources */,
 				79DACCCA1C6B9F5500C52F54 /* GameScene.swift in Sources */,
+				79D112AD1C6DE5F800A40827 /* BeerCounter.swift in Sources */,
 				79DACCCC1C6B9F5500C52F54 /* GameViewController.swift in Sources */,
 				79DACCC61C6B9F5500C52F54 /* AppDelegate.swift in Sources */,
 			);
@@ -344,6 +366,10 @@
 			baseConfigurationReference = B2D3C1A42BE71BD50845C5B7 /* Pods-ReactCoord.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = ReactCoord/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -357,6 +383,10 @@
 			baseConfigurationReference = D8F2704C0CDCA8257B2091CA /* Pods-ReactCoord.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = ReactCoord/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

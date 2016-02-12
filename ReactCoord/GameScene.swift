@@ -25,14 +25,6 @@ class GameScene: SKScene {
     var newColorTime = NSTimeInterval()
     var gameStartTime = NSTimeInterval()
     var gameTime = NSTimeInterval()
-
-    // label properties
-    let yourTimeLabel = SKLabelNode()
-    let timeLabel = SKLabelNode()
-    let startLabel = SKLabelNode()
-    let avgReactLabel = SKLabelNode()
-    let avgReactTime = SKLabelNode()
-    let gameOverLabel = SKLabelNode()
     
     // screen properties
     let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -55,7 +47,7 @@ class GameScene: SKScene {
     var touchLocation = CGPoint()
     var previousNumber = Int()
     var countOfAttempts = 0
-    let colorArray = [SKColor.blackColor(),SKColor.greenColor(),SKColor.redColor(),SKColor.blueColor(),SKColor.yellowColor(),SKColor.orangeColor(),SKColor.whiteColor(),SKColor.magentaColor(),SKColor.cyanColor(),SKColor.brownColor()]
+    let colorArray = [SKColor.blackColor(),SKColor.greenColor(),SKColor.redColor(),SKColor.blueColor(),SKColor.yellowColor(),SKColor.orangeColor(),SKColor.blueColor(),SKColor.magentaColor(),SKColor.cyanColor(),SKColor.brownColor()]
 
     // result arrays
     let reactionTimeResultsArr = NSMutableArray()
@@ -72,93 +64,65 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
-//        if countOfAttempts == 0{
-//            self.sprite.position = CGPointMake(frame.size.width/2, frame.size.height/2)
-//            self.addChild(self.sprite)
-//            countOfAttempts = 1
-//            centerBall.hidden = false
-//        }
+        let touch = touches.first
+        let touchLocation = touch!.locationInNode(self)
+        let touchedNode = self.nodeAtPoint(touchLocation)
         
-        startLabel.hidden = true
-        
-        self.backgroundColor = UIColor.blueColor()
-        
-        let randomSecondDelay = Int(arc4random_uniform(UInt32(3)))+1
-        
-        if let touch = touches.first{
-            self.touchLocation = touch.locationInNode(self.sprite)
-            
-        }
-        calculateDistance()
-        
-        if gameOverBool{
-            self.removeAllChildren()
-            gameOverBool = false
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "startGame", userInfo: nil, repeats: false)
-        }
-        
-        
-        if self.touchLocation.y <= 0{
-            self.destY = self.currentY + (touchLocation.y * (-1))
-            print(self.destY)
-        }
-        else{
-            self.destY = self.currentY - (touchLocation.y * 1)
-            print(self.destY)
-        }
-        if self.touchLocation.x <= 0 {
-            self.destX = self.currentX + (touchLocation.x * (-1))
-            print(self.destX)
-        }
-        else{
-            self.destX = self.currentX - (touchLocation.x * 1)
-            print(self.destX)
-        }
-        
-        self.sprite.fillColor = SKColor.clearColor()
-        
-        NSTimer.scheduledTimerWithTimeInterval(Double(randomSecondDelay), target: self, selector: "updateSpriteColor", userInfo: nil, repeats: false)
-        tapStartTime = NSDate.timeIntervalSinceReferenceDate()
-        
-        if newColorTime == 0.0{
-            timeLabel.text = "0.00 seconds"
-            avgReactTime.text = "0.00 seconds"
-        }
-        else{
-            let deltaTime = tapStartTime - newColorTime
-            timeLabel.text = String(format: "%.02f",calculateDistance())
-            reactionTimeResultsArr.addObject(deltaTime)
-            avgReactTime.text = String(format: "%.02f", avgReaction()) + " seconds"
-        }
+        if touchedNode.name == "gameball"{
+            if(self.sprite.fillColor != SKColor.clearColor()){
+                
+                self.sprite.fillColor = SKColor.clearColor()
+                
+                
+                let randomSecondDelay = Int(arc4random_uniform(UInt32(3)))+1
+                NSTimer.scheduledTimerWithTimeInterval(Double(randomSecondDelay), target: self, selector: "updateSpriteColor", userInfo: nil, repeats: false)
+                tapStartTime = NSDate.timeIntervalSinceReferenceDate()
+                
+                if newColorTime == 0.0{
 
-        
+                }
+                else{
+                    let deltaTime = tapStartTime - newColorTime
+                    reactionTimeResultsArr.addObject(deltaTime)
+                }
+            }
+        }
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if (!intersectsNode(self.sprite)) || reactionTimeResultsArr.count >= 20{
+        if (!intersectsNode(self.sprite)) || gameTime >= 10.0{
+           
+            let avgDistance = calculateDistance()
+            let avgReact = avgReaction()
             
-            if reactionTimeResultsArr.count >= 10 {
-//                gameOverLabel.text = "Finished Test"
-                
-            }
+            self.userData?.setValue(avgDistance, forKey: "avgDistance")
+            self.userData?.setValue(avgReact, forKey: "avgReaction")
             
-//            self.view.le
+            print(self.userData)
             
-            self.removeChildrenInArray([self.sprite])
-            gameOverLabel.hidden = false
-            timeLabel.hidden = false
-            yourTimeLabel.hidden = false
-            avgReactLabel.hidden = false
-            avgReactTime.hidden = false
-            gameOverBool = true
-            centerBall.hidden = true
+            let gamescene = GameOverScene(size: size)
+            gamescene.scaleMode = scaleMode
+            let transitionType = SKTransition.flipHorizontalWithDuration(0.5)
+            
+            gamescene.userData = self.userData
+            
+            restart()
+            
+            view?.presentScene(gamescene, transition: transitionType)
         }
+        calculateDistance()
+
         
         let actionX = SKAction.moveToX(self.destX, duration: 0.5)
         let actionY = SKAction.moveToY(self.destY, duration: 0.5)
         let groupAction = SKAction.group([actionY,actionX])
         self.sprite.runAction(groupAction)
+    }
+    
+    func restart() {
+        self.removeAllChildren()
+        self.removeAllActions()
     }
     
     // MARK: - My Methods
@@ -181,11 +145,13 @@ class GameScene: SKScene {
         screenWidth = screenSize.width
         sprite.xScale = 0.5
         sprite.yScale = 0.5
+        sprite.lineWidth = 2.0
+        sprite.name = "gameball"
         
         sprite.zPosition = 2
         let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
         sprite.runAction(SKAction.repeatActionForever(action))
-        self.sprite.fillColor = colorArray[randomIndex()]
+        self.sprite.fillColor = SKColor.clearColor()
         self.sprite.position = CGPointMake(frame.size.width/2, frame.size.height/2)
         self.addChild(self.sprite)
 
@@ -196,6 +162,9 @@ class GameScene: SKScene {
             // 2
             motionDetection()
         }
+        let randomSecondDelay = Int(arc4random_uniform(UInt32(3)))+1
+        NSTimer.scheduledTimerWithTimeInterval(Double(randomSecondDelay), target: self, selector: "updateSpriteColor", userInfo: nil, repeats: false)
+
 
         
     }
@@ -212,15 +181,23 @@ class GameScene: SKScene {
             
             if self.gameTime > 5.0{
                 multiplier += 1000
+                self.centerBall.xScale = 0.75
+                self.centerBall.yScale = 0.75
             }
             if self.gameTime > 10.0{
                 multiplier += 1500
+                self.centerBall.xScale = 0.5
+                self.centerBall.yScale = 0.5
             }
             if self.gameTime > 15.0{
                 multiplier += 1500
+                self.centerBall.xScale = 0.25
+                self.centerBall.yScale = 0.25
             }
             if self.gameTime > 20.0{
                 multiplier += 2000
+                self.centerBall.xScale = 0.1
+                self.centerBall.yScale = 0.1
             }
             // 3
             if data!.acceleration.x < 0 {
@@ -288,45 +265,9 @@ class GameScene: SKScene {
     }
     
     func setupLabels(){
-        // startLabel
-        yourTimeLabel.text = "Avg. Distance"
-        yourTimeLabel.fontColor = SKColor.blackColor()
-        yourTimeLabel.fontSize = 30
-        yourTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-200)
-        yourTimeLabel.hidden = true
-        self.addChild(yourTimeLabel)
         
-        // timelabel
-        timeLabel.text = "00:00"
-        timeLabel.fontColor = SKColor.blackColor()
-        timeLabel.fontSize = 30
-        timeLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-240)
-        timeLabel.hidden = true
-        self.addChild(timeLabel)
-        
-        avgReactLabel.text = "Your avg reaction time"
-        avgReactLabel.fontColor = SKColor.blackColor()
-        avgReactLabel.fontSize = 30
-        avgReactLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-280)
-        avgReactLabel.hidden = true
-        self.addChild(avgReactLabel)
-        
-        avgReactTime.text = "0.00 seconds"
-        avgReactTime.fontColor = SKColor.blackColor()
-        avgReactTime.fontSize = 30
-        avgReactTime.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-320)
-        avgReactTime.hidden = true
-        self.addChild(avgReactTime)
-        
-        gameOverLabel.text = "GAME OVER"
-        gameOverLabel.fontColor = SKColor.redColor()
-        gameOverLabel.fontSize = 40
-        gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) )
-        gameOverLabel.hidden = true
-        self.addChild(gameOverLabel)
-        
-        centerBall.xScale = 0.5
-        centerBall.yScale = 0.5
+        centerBall.xScale = 1
+        centerBall.yScale = 1
         centerBall.position = CGPointMake(frame.size.width/2, frame.size.height/2)
         centerBall.fillColor = SKColor.blackColor()
         //        centerBall.cir = 50

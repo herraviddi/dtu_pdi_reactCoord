@@ -8,10 +8,16 @@
 
 import UIKit
 import SpriteKit
+import Alamofire
+import SwiftyJSON
+
 
 
 class StartMenuScene: SKScene , UITextFieldDelegate{
     
+    var userObjectData = NSMutableDictionary()
+    
+    let apiUrl = "https://group23api.herokuapp.com/api/user"
     
     var nameTextField = UITextField()
     var ageTextField = UITextField()
@@ -21,16 +27,28 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     
     var userInfo = [String:String]()
     
-    var username : String!
-    var userAge : Int!
-    var userSex : String!
+    var username = String()
+    var userAge = Int()
+    var userSex = String()
+    var userID = Int()
+    var numberOfDrinks = Int()
     
+    var sexErrorLabel = UILabel()
+    
+    
+    var jsonArray:NSMutableArray?
 
+    var isMale = false
+    var isFemale = false
+    
+    var userExists = false
+    
+    
+    var startGameButton = SKSpriteNode()
     
     
     override func didMoveToView(view: SKView) {
-        
-        
+    
         nameTextField.frame = CGRectMake(50, size.height/2-200, size.width-100, 50)
         nameTextField.placeholder = "your name please"
         nameTextField.textColor = SKColor.blackColor()
@@ -72,53 +90,217 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         self.view?.addSubview(femaleButton)
         
         
+        sexErrorLabel.frame = CGRectMake(50, size.height/2-50, size.width-100, 50)
+        sexErrorLabel.text = "Please select your sex"
+        sexErrorLabel.textColor = UIColor.redColor()
+        sexErrorLabel.hidden = true
+        sexErrorLabel.textAlignment = .Center
+        self.view?.addSubview(sexErrorLabel)
         
-        let startGameButton = SKSpriteNode(imageNamed: "Start-Test.png")
+        
+        startGameButton = SKSpriteNode(imageNamed: "Start-Test.png")
         startGameButton.position = CGPointMake(size.width/2, size.height/2-200)
         startGameButton.setScale(0.5)
         startGameButton.name = "startgame"
         addChild(startGameButton)
         
-        backgroundColor = SKColor.blueColor()
 
     }
     
     func maleButtonPressed(){
-        print("you are a male")
         maleButton.backgroundColor = SKColor.whiteColor()
         maleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         femaleButton.backgroundColor = SKColor.clearColor()
         femaleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         userSex = "M"
+        isMale = true
+        
     }
 
     func femaleButtonPressed(){
-        print("you are a female")
         femaleButton.backgroundColor = SKColor.whiteColor()
         femaleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         maleButton.backgroundColor = SKColor.clearColor()
         maleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         userSex = "F"
+        isFemale = true
     }
+    
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         // hide keyboard
+        username = nameTextField.text!
         nameTextField.resignFirstResponder()
         ageTextField.resignFirstResponder()
-        
-        
+
         let touch = touches.first
         let touchLocation = touch!.locationInNode(self)
         let touchedNode = self.nodeAtPoint(touchLocation)
         if(touchedNode.name == "startgame"){
-            let gameOverScene = GameScene(size: size)
-            gameOverScene.scaleMode = scaleMode
-            let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
-            nameTextField.hidden = true
-            ageTextField.hidden = true
-            view?.presentScene(gameOverScene,transition: transitionType)
+            if (username != "" && userSex != "" && ageTextField.text != "" ){
+
+                let beerScene = BeerCounter(size: size)
+                beerScene.scaleMode = scaleMode
+                let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
+                userAge = Int(ageTextField.text!)!
+                nameTextField.hidden = true
+                ageTextField.hidden = true
+                maleButton.hidden = true
+                femaleButton.hidden = true
+                sexErrorLabel.hidden = true
+                
+                startGameButton.hidden = true
+                
+                if !userExists{
+                    postData()
+                }else{
+                    checkForUser()
+                }
+
+                delay(1.0){
+                    self.setUserData()
+                    beerScene.userData = self.userObjectData
+                    
+                    print(self.userObjectData)
+                    
+                    self.view?.presentScene(beerScene,transition: transitionType)
+                }
+            
+            }else{
+                
+                if nameTextField.text == ""{
+                    nameTextField.placeholder = "your name is missing"
+                }
+                
+                if (userSex == ""){
+                    sexErrorLabel.hidden = false
+                }else{
+                    sexErrorLabel.hidden = true
+                }
+                
+                if (ageTextField.text == ""){
+                    ageTextField.placeholder = "your age is missing"
+                }
+            }
+
+        }else{
+            checkForUser()
         }
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    
+    func setUserData(){
+        self.userObjectData = ["name": self.username, "age": self.userAge, "number_of_drinks": self.numberOfDrinks, "sex": self.userSex, "id": self.userID]
+    }
+    
+    func checkForUser(){
+        
+        if let url = NSURL(string: apiUrl + "?name=" + nameTextField.text!) {
+            if let data = try? NSData(contentsOfURL: url, options: []) {
+                let json = JSON(data: data)
+                parseJSON(json)
+                userExists = true
+            }
+            else{
+                userExists = false
+                turnOnUserInput()
+                ageTextField.clearsOnBeginEditing = true
+                femaleButton.backgroundColor = SKColor.clearColor()
+                femaleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                maleButton.backgroundColor = SKColor.clearColor()
+                maleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                userAge = 0
+                userSex = ""
+            }
+        }
+    }
+    
+    func turnOnUserInput(){
+        ageTextField.userInteractionEnabled = true
+        maleButton.enabled = true
+        femaleButton.enabled = true
+    }
+    
+    func turnOffUserInput(){
+        ageTextField.userInteractionEnabled = false
+        maleButton.enabled = false
+        femaleButton.enabled = false
+    }
+    
+    func parseJSON(json: JSON) {
+        
+        for result in json["user"].dictionaryValue{
+            
+            if result.0 == "age"{
+                ageTextField.text = result.1.stringValue
+                self.username = result.1.stringValue
+            }
+            if result.0 == "sex"{
+                self.userSex = result.1.stringValue
+                
+                if result.1 == "M"{
+                    maleButtonPressed()
+                }
+                if result.1 == "F"{
+                    femaleButtonPressed()
+                }
+                
+            }
+            if result.0 == "id"{
+                self.userID = Int(result.1.stringValue)!
+            }
+            if result.0 == "age"{
+                self.userAge = Int(result.1.stringValue)!
+            }
+            
+            if result.0 == "number_of_drinks" {
+                print(result.1)
+                print("beers")
+                
+                if (result.1 != nil){
+                    self.numberOfDrinks = result.1.intValue
+                    print(self.numberOfDrinks)
+                }else{
+                    self.numberOfDrinks = 0
+                }
+
+            }
+
+            turnOffUserInput()
+         }
+        
+    }
+    
+
+    func postData(){
+        let parameters: [String : AnyObject] = [
+            "age" : userAge,
+            "name" : username,
+            "sex" : userSex,
+            "number_of_drinks" : 0
+        ]
+        
+        Alamofire.request(.POST, "https://group23api.herokuapp.com/api/user", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (response) -> Void in
+            // check if the result has a vales
+            if let JSON = response.result.value{
+                if let userDict = JSON.valueForKey("user"){
+                    self.userID = userDict.valueForKey("id") as! Int
+                    print(self.userID)
+                 }
+            }
+        })
+
     }
     
     
@@ -126,17 +308,19 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     
     func textFieldDidBeginEditing(textField: UITextField) {
 
+        checkForUser()
+
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+
         if (textField == ageTextField){
-            userAge = Int(ageTextField.text!)
-            print(userAge)
+            userAge = Int(ageTextField.text!)!
         }
         
         if (textField == nameTextField){
-            username = nameTextField.text
-            print(username)
+            username = nameTextField.text!
+            checkForUser()
         }
         // Hides the keyboard
         textField.resignFirstResponder()
@@ -156,15 +340,14 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         items.append(flexSpace)
         items.append(done)
         
-        doneToolbar.items = items as! [UIBarButtonItem]
+        doneToolbar.items = items as? [UIBarButtonItem]
         doneToolbar.sizeToFit()
         
         textField.inputAccessoryView = doneToolbar
         
     }
     func doneButtonAction(){
-        userAge = Int(ageTextField.text!)
-        print(userAge)
+        userAge = Int(ageTextField.text!)!
         ageTextField.resignFirstResponder() //Hide the keyboard
     }
     
