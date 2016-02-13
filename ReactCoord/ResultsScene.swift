@@ -149,6 +149,7 @@ class ResultsScene: SKScene {
     }
     func restart() {
         self.chartView.removeFromSuperview()
+        self.chartView2.removeFromSuperview()
         self.removeAllChildren()
         self.removeAllActions()
     }
