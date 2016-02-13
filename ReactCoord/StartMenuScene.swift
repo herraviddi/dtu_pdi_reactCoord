@@ -123,6 +123,17 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         startGameButton.removeFromParent()
     }
     
+    func resetSexButtons(){
+        femaleButton.backgroundColor = SKColor.clearColor()
+        femaleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        maleButton.backgroundColor = SKColor.clearColor()
+        maleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        userSex = ""
+        isMale = false
+        isFemale = false
+        
+    }
+    
     func maleButtonPressed(){
         maleButton.backgroundColor = SKColor.whiteColor()
         maleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
@@ -146,6 +157,12 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         
         // hide keyboard
         username = nameTextField.text!
+//        checkForUser()
+//        if !userExists{
+//            ageTextField.placeholder = "your age please"
+//            resetSexButtons()
+//            
+//        }
         nameTextField.resignFirstResponder()
         ageTextField.resignFirstResponder()
 
@@ -233,6 +250,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
             if let data = try? NSData(contentsOfURL: url, options: []) {
                 let json = JSON(data: data)
                 parseJSON(json)
+                self.userExists = true
 
             }
             else{

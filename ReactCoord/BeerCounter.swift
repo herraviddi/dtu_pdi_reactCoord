@@ -46,13 +46,12 @@ class BeerCounter: SKScene {
         beerCount = Int((self.userData?.valueForKey("number_of_drinks"))! as! NSNumber)
         
         initialBeerCount = beerCount
-        
-        print(beerCount)
-        
+                
         if(beerCount < 1){
             beer1 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer1 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer1.userInteractionEnabled = false
         }
         beer1.name = "beer1"
         beer1.position = CGPointMake(50, size.height-100-50)
@@ -64,6 +63,7 @@ class BeerCounter: SKScene {
             beer2 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer2 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer2.userInteractionEnabled = false
         }
         beer2.name = "beer2"
         beer2.position = CGPointMake(150, size.height-100-50)
@@ -75,6 +75,7 @@ class BeerCounter: SKScene {
             beer3 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer3 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer3.userInteractionEnabled = false
         }
         beer3.name = "beer3"
         beer3.position = CGPointMake(250, size.height-100-50)
@@ -86,6 +87,7 @@ class BeerCounter: SKScene {
             beer4 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer4 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer4.userInteractionEnabled = false
         }
         beer4.name = "beer4"
         beer4.position = CGPointMake(350, size.height-100-50)
@@ -97,6 +99,7 @@ class BeerCounter: SKScene {
             beer5 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer5 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer5.userInteractionEnabled = false
         }
         beer5.name = "beer5"
         beer5.position = CGPointMake(50, size.height-100-150)
@@ -108,6 +111,7 @@ class BeerCounter: SKScene {
             beer6 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer6 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer6.userInteractionEnabled = false
         }
         beer6.name = "beer6"
         beer6.position = CGPointMake(150,size.height-100-150)
@@ -119,6 +123,7 @@ class BeerCounter: SKScene {
             beer7 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer7 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer7.userInteractionEnabled = false
         }
         beer7.name = "beer7"
         beer7.position = CGPointMake(250, size.height-100-150)
@@ -130,6 +135,7 @@ class BeerCounter: SKScene {
             beer8 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer8 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer8.userInteractionEnabled = false
         }
         beer8.name = "beer8"
         beer8.position = CGPointMake(350, size.height-100-150)
@@ -141,6 +147,7 @@ class BeerCounter: SKScene {
             beer9 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer9 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer9.userInteractionEnabled = false
         }
         beer9.name = "beer9"
         beer9.position = CGPointMake(50, size.height-100-250)
@@ -152,6 +159,7 @@ class BeerCounter: SKScene {
             beer10 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer10 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer10.userInteractionEnabled = false
         }
         beer10.name = "beer10"
         beer10.position = CGPointMake(150, size.height-100-250)
@@ -163,6 +171,7 @@ class BeerCounter: SKScene {
             beer11 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer11 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer11.userInteractionEnabled = false
         }
         beer11.name = "beer11"
         beer11.position = CGPointMake(250, size.height-100-250)
@@ -174,6 +183,7 @@ class BeerCounter: SKScene {
             beer12 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer12 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer12.userInteractionEnabled = false
         }
         beer12.name = "beer12"
         beer12.position = CGPointMake(350, size.height-100-250)
@@ -185,6 +195,7 @@ class BeerCounter: SKScene {
             beer13 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer13 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer13.userInteractionEnabled = false
         }
         beer13.name = "beer13"
         beer13.position = CGPointMake(50, size.height-100-350)
@@ -196,6 +207,7 @@ class BeerCounter: SKScene {
             beer14 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer14 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer14.userInteractionEnabled = false
         }
         beer14.name = "beer14"
         beer14.position = CGPointMake(150, size.height-100-350)
@@ -207,6 +219,7 @@ class BeerCounter: SKScene {
             beer15 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer15 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer15.userInteractionEnabled = false
         }
         beer15.name = "beer15"
         beer15.position = CGPointMake(250, size.height-100-350)
@@ -218,6 +231,7 @@ class BeerCounter: SKScene {
             beer16 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer16 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer16.userInteractionEnabled = false
         }
         beer16.name = "beer16"
         beer16.position = CGPointMake(350, size.height-100-350)
@@ -229,6 +243,7 @@ class BeerCounter: SKScene {
             beer17 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer17 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer17.userInteractionEnabled = false
         }
         beer17.name = "beer17"
         beer17.position = CGPointMake(50, size.height-100-450)
@@ -240,6 +255,7 @@ class BeerCounter: SKScene {
             beer18 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer18 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer18.userInteractionEnabled = false
         }
         beer18.name = "beer18"
         beer18.position = CGPointMake(150, size.height-100-450)
@@ -251,6 +267,7 @@ class BeerCounter: SKScene {
             beer19 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer19 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer19.userInteractionEnabled = false
         }
         beer19.name = "beer19"
         beer19.position = CGPointMake(250, size.height-100-450)
@@ -262,12 +279,12 @@ class BeerCounter: SKScene {
             beer20 = SKSpriteNode(imageNamed: "fullBeer")
         }else{
             beer20 = SKSpriteNode(imageNamed: "emptyBeer")
+            beer20.userInteractionEnabled = false
         }
         beer20.name = "beer20"
         beer20.position = CGPointMake(350, size.height-100-450)
         self.addChild(beer20)
 
-        
         
         startLabel.text = "GO!"
         startLabel.position = CGPointMake(200, size.height-650)
@@ -360,6 +377,8 @@ class BeerCounter: SKScene {
             beer18.texture = SKTexture(imageNamed: "emptyBeer")
         }
         if(touchedNode.name == "beer19" && beerCount==initialBeerCount){
+        
+            
             beerCount += 1
             beer19.texture = SKTexture(imageNamed: "emptyBeer")
         }
@@ -382,7 +401,7 @@ class BeerCounter: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if(beerCount != initialBeerCount){
+        if(beerCount != initialBeerCount || initialBeerCount == 0){
             startLabel.hidden = false
         }
     }

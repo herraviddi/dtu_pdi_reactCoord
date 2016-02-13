@@ -88,22 +88,31 @@ class GameScene: SKScene {
             }
         }
     }
+    
+    func restart() {
+        self.sprite.removeFromParent()
+        self.centerBall.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
+    }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
 //        if (!intersectsNode(self.sprite)) || gameTime >= 10.0{
-        if (gameTime >= 10.0){
+        if (gameTime >= 30.0){
             let avgDistance = calculateDistance()
             let avgReact = avgReaction()
             
             self.userData?.setValue(avgDistance, forKey: "avgDistance")
             self.userData?.setValue(avgReact, forKey: "avgReaction")
             
-            print(self.userData)
             
             let gamescene = GameOverScene(size: size)
             gamescene.scaleMode = scaleMode
             let transitionType = SKTransition.flipHorizontalWithDuration(0.5)
+            
+//            self.removeAllChildren()
+            restart()
             
             gamescene.userData = self.userData
             
@@ -119,10 +128,6 @@ class GameScene: SKScene {
         self.sprite.runAction(groupAction)
     }
     
-    func restart() {
-        self.removeAllChildren()
-        self.removeAllActions()
-    }
     
     // MARK: - My Methods
     
