@@ -244,6 +244,8 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     
     func parseJSON(json: JSON) {
         
+        print(json)
+        
         for result in json["user"].dictionaryValue{
             
             if result.0 == "age"{
@@ -259,7 +261,6 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
                 if result.1 == "F"{
                     femaleButtonPressed()
                 }
-                
             }
             if result.0 == "id"{
                 self.userID = Int(result.1.stringValue)!
@@ -276,6 +277,9 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
                     self.numberOfDrinks = 0
                 }
             }
+            
+            
+            
             self.userExists = true
 
             turnOffUserInput()

@@ -14,6 +14,7 @@
 		79D112AF1C6E051900A40827 /* CountInGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112AE1C6E051900A40827 /* CountInGameScene.swift */; };
 		79D112B11C6E096200A40827 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112B01C6E096200A40827 /* GameOverScene.swift */; };
 		79D112B31C6E126100A40827 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112B21C6E126100A40827 /* UserObject.swift */; };
+		79D112B51C6EAC3600A40827 /* ResultsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D112B41C6EAC3600A40827 /* ResultsScene.swift */; };
 		79DACCC61C6B9F5500C52F54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */; };
 		79DACCC81C6B9F5500C52F54 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 79DACCC71C6B9F5500C52F54 /* GameScene.sks */; };
 		79DACCCA1C6B9F5500C52F54 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DACCC91C6B9F5500C52F54 /* GameScene.swift */; };
@@ -33,6 +34,7 @@
 		79D112AE1C6E051900A40827 /* CountInGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountInGameScene.swift; sourceTree = "<group>"; };
 		79D112B01C6E096200A40827 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		79D112B21C6E126100A40827 /* UserObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
+		79D112B41C6EAC3600A40827 /* ResultsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsScene.swift; sourceTree = "<group>"; };
 		79DACCC21C6B9F5500C52F54 /* ReactCoord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactCoord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DACCC51C6B9F5500C52F54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79DACCC71C6B9F5500C52F54 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				79D112AE1C6E051900A40827 /* CountInGameScene.swift */,
 				796193951C6CB77F001127C6 /* StartMenuScene.swift */,
 				79D112AC1C6DE5F800A40827 /* BeerCounter.swift */,
+				79D112B41C6EAC3600A40827 /* ResultsScene.swift */,
 				79D112B21C6E126100A40827 /* UserObject.swift */,
 				79DACCC91C6B9F5500C52F54 /* GameScene.swift */,
 				79D112B01C6E096200A40827 /* GameOverScene.swift */,
@@ -251,6 +254,7 @@
 				79D112B31C6E126100A40827 /* UserObject.swift in Sources */,
 				79D112AF1C6E051900A40827 /* CountInGameScene.swift in Sources */,
 				79D112B11C6E096200A40827 /* GameOverScene.swift in Sources */,
+				79D112B51C6EAC3600A40827 /* ResultsScene.swift in Sources */,
 				79DACCCA1C6B9F5500C52F54 /* GameScene.swift in Sources */,
 				79D112AD1C6DE5F800A40827 /* BeerCounter.swift in Sources */,
 				79DACCCC1C6B9F5500C52F54 /* GameViewController.swift in Sources */,

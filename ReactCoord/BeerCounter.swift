@@ -43,9 +43,6 @@ class BeerCounter: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        
-        
-        
         beerCount = Int((self.userData?.valueForKey("number_of_drinks"))! as! NSNumber)
         
         initialBeerCount = beerCount

@@ -59,6 +59,8 @@ class GameScene: SKScene {
         startNewGame()
     }
     
+    
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
@@ -89,8 +91,8 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if (!intersectsNode(self.sprite)) || gameTime >= 10.0{
-           
+//        if (!intersectsNode(self.sprite)) || gameTime >= 10.0{
+        if (gameTime >= 10.0){
             let avgDistance = calculateDistance()
             let avgReact = avgReaction()
             
@@ -105,7 +107,6 @@ class GameScene: SKScene {
             
             gamescene.userData = self.userData
             
-            restart()
             
             view?.presentScene(gamescene, transition: transitionType)
         }
@@ -126,6 +127,8 @@ class GameScene: SKScene {
     // MARK: - My Methods
     
     func startNewGame(){
+        
+        restart()
         
         setupLabels()
         
@@ -175,7 +178,7 @@ class GameScene: SKScene {
             self.currentX = self.sprite.position.x
             self.currentY = self.sprite.position.y
             
-            var multiplier: Double = 3000
+            var multiplier: Double = 4000
             
             if self.gameTime > 5.0{
                 multiplier += 1000
@@ -188,12 +191,12 @@ class GameScene: SKScene {
                 self.centerBall.yScale = 0.5
             }
             if self.gameTime > 15.0{
-                multiplier += 1500
+                multiplier += 2000
                 self.centerBall.xScale = 0.25
                 self.centerBall.yScale = 0.25
             }
             if self.gameTime > 20.0{
-                multiplier += 2000
+                multiplier += 2500
                 self.centerBall.xScale = 0.1
                 self.centerBall.yScale = 0.1
             }
