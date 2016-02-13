@@ -74,7 +74,7 @@ class GameOverScene: SKScene {
         
         
         resultLabel.text = "Result History"
-        resultLabel.fontColor = SKColor.whiteColor()
+        resultLabel.fontColor = SKColor.yellowColor()
         resultLabel.fontSize = 30
         resultLabel.name = "results"
         resultLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-220)

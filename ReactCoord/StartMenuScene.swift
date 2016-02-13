@@ -114,6 +114,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     }
     
     func removeMyObjectsFromView(){
+        resultLabel.removeFromParent()
         nameTextField.removeFromSuperview()
         ageTextField.removeFromSuperview()
         maleButton.removeFromSuperview()
@@ -170,7 +171,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
                 
                 let beerScene = BeerCounter(size: size)
                 beerScene.scaleMode = scaleMode
-                let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
+                let transitionType = SKTransition.flipHorizontalWithDuration(0.5)
                 userAge = Int(ageTextField.text!)!
                 
                 removeMyObjectsFromView()
@@ -181,7 +182,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
 
                 }
 
-                delay(1.0){
+                delay(0.4){
                     self.setUserData()
                     beerScene.userData = self.userObjectData
                     
@@ -332,6 +333,17 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
 
         checkForUser()
 
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == ageTextField{
+            
+            let age = Int(ageTextField.text!)
+            if age < 18{
+                ageTextField.text = ""
+                ageTextField.placeholder = "You have to be at least 18 years old"
+            }
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
