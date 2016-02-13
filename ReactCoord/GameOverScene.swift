@@ -116,17 +116,6 @@ class GameOverScene: SKScene {
                     print(responseObject)
                 }
         }
-        
-        
-        
-        
-//        Alamofire.request(.POST, "https://group23api.herokuapp.com/api/results=", parameters: resultsDict, encoding: .JSON).responseJSON(completionHandler: { (response) -> Void in
-//            // check if the result has a vales
-//            if let JSON = response.result.value{
-//                print(JSON)
-//            }
-//            
-//        })
     }
     
     
@@ -137,7 +126,11 @@ class GameOverScene: SKScene {
         let touchedNode = self.nodeAtPoint(touchLocation)
         
         if(touchedNode.name == "results"){
-
+            let gamescene = ResultsScene(size: size)
+            gamescene.scaleMode = scaleMode
+            let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
+            gamescene.userData = self.userData
+            view?.presentScene(gamescene, transition: transitionType)
             
         }
         if(touchedNode.name == "playagain"){

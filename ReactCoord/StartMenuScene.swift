@@ -24,6 +24,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     var maleButton = UIButton()
     var femaleButton = UIButton()
     
+    var resultLabel = SKLabelNode()
     
     var userInfo = [String:String]()
     
@@ -60,8 +61,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         nameTextField.autocorrectionType = UITextAutocorrectionType.Yes
         nameTextField.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
         self.view?.addSubview(nameTextField)
-        
-        
+
         ageTextField.frame = CGRectMake(50, size.height/2-100, size.width-100, 50)
         ageTextField.placeholder = "your age please"
         ageTextField.textColor = SKColor.blackColor()
@@ -71,42 +71,55 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         ageTextField.borderStyle = UITextBorderStyle.RoundedRect
         addDoneButtonOnKeyboard(ageTextField)
         self.view?.addSubview(ageTextField)
-        
-        
-        
+ 
         maleButton.frame = CGRectMake(50, size.height/2, 150, 50)
         maleButton.setTitle("MALE", forState: UIControlState.Normal)
         maleButton.addTarget(self, action: "maleButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         maleButton.layer.cornerRadius = 5
         maleButton.layer.borderWidth = 1
-        maleButton.layer.borderColor = SKColor.blackColor().CGColor
+        maleButton.layer.borderColor = SKColor.whiteColor().CGColor
         self.view?.addSubview(maleButton)
-        
 
         femaleButton.frame = CGRectMake(210, size.height/2, 150, 50)
         femaleButton.setTitle("FEMALE", forState: UIControlState.Normal)
         femaleButton.addTarget(self, action: "femaleButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         femaleButton.layer.cornerRadius = 5
         femaleButton.layer.borderWidth = 1
-        femaleButton.layer.borderColor = SKColor.blackColor().CGColor
+        femaleButton.layer.borderColor = SKColor.whiteColor().CGColor
         self.view?.addSubview(femaleButton)
-        
-        
+ 
         sexErrorLabel.frame = CGRectMake(50, size.height/2-50, size.width-100, 50)
         sexErrorLabel.text = "Please select your sex"
         sexErrorLabel.textColor = UIColor.redColor()
         sexErrorLabel.hidden = true
         sexErrorLabel.textAlignment = .Center
         self.view?.addSubview(sexErrorLabel)
-        
-        
+ 
         startGameButton = SKSpriteNode(imageNamed: "Start-Test.png")
         startGameButton.position = CGPointMake(size.width/2, size.height/2-200)
         startGameButton.setScale(0.5)
         startGameButton.name = "startgame"
         addChild(startGameButton)
         
+        resultLabel.text = "Result History"
+        resultLabel.fontColor = SKColor.yellowColor()
+        resultLabel.fontSize = 30
+        resultLabel.name = "results"
+        resultLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-300)
+        self.addChild(resultLabel)
+        resultLabel.hidden = true
+        
+        
 
+    }
+    
+    func removeMyObjectsFromView(){
+        nameTextField.removeFromSuperview()
+        ageTextField.removeFromSuperview()
+        maleButton.removeFromSuperview()
+        femaleButton.removeFromSuperview()
+        sexErrorLabel.removeFromSuperview()
+        startGameButton.removeFromParent()
     }
     
     func maleButtonPressed(){
@@ -128,8 +141,6 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         isFemale = true
     }
     
-    
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         // hide keyboard
@@ -140,6 +151,18 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         let touch = touches.first
         let touchLocation = touch!.locationInNode(self)
         let touchedNode = self.nodeAtPoint(touchLocation)
+        
+        if(touchedNode.name == "results"){
+            let gamescene = ResultsScene(size: size)
+            gamescene.scaleMode = scaleMode
+            let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
+            gamescene.userData = ["id":userID]
+
+            removeMyObjectsFromView()
+            view?.presentScene(gamescene, transition: transitionType)
+            
+        }
+        
         if(touchedNode.name == "startgame"){
             if (username != "" && userSex != "" && ageTextField.text != "" ){
 
@@ -149,13 +172,8 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
                 beerScene.scaleMode = scaleMode
                 let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
                 userAge = Int(ageTextField.text!)!
-                nameTextField.hidden = true
-                ageTextField.hidden = true
-                maleButton.hidden = true
-                femaleButton.hidden = true
-                sexErrorLabel.hidden = true
                 
-                startGameButton.hidden = true
+                removeMyObjectsFromView()
                 
                 if !self.userExists{
                     postData()
@@ -218,6 +236,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
             }
             else{
                 self.userExists = false
+                self.resultLabel.hidden = true
                 turnOnUserInput()
                 ageTextField.clearsOnBeginEditing = true
                 femaleButton.backgroundColor = SKColor.clearColor()
@@ -243,9 +262,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     }
     
     func parseJSON(json: JSON) {
-        
-        print(json)
-        
+                
         for result in json["user"].dictionaryValue{
             
             if result.0 == "age"{
@@ -278,6 +295,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
                 }
             }
             
+            self.resultLabel.hidden = false
             
             
             self.userExists = true

@@ -5,4 +5,5 @@ use_frameworks!
 target 'ReactCoord' do
 pod 'Alamofire', '~> 3.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'Charts', '~> 2.2'
 end
