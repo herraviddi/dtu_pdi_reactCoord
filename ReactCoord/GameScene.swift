@@ -13,6 +13,8 @@ class GameScene: SKScene {
 
     // MARK: - Properties
     var gameOverBool = Bool()
+    var colorActive = false
+    
     
     // sprite nodes properties
     let sprite = SKShapeNode(circleOfRadius: 200)
@@ -61,6 +63,8 @@ class GameScene: SKScene {
     
     
     
+    
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
@@ -73,6 +77,7 @@ class GameScene: SKScene {
                 
                 self.sprite.fillColor = SKColor.clearColor()
                 
+                colorActive = false
                 
                 let randomSecondDelay = Int(arc4random_uniform(UInt32(3)))+1
                 NSTimer.scheduledTimerWithTimeInterval(Double(randomSecondDelay), target: self, selector: "updateSpriteColor", userInfo: nil, repeats: false)
@@ -122,6 +127,14 @@ class GameScene: SKScene {
         }
         calculateDistance()
 
+        
+        if !colorActive{
+            self.userInteractionEnabled = false
+        }
+        else{
+            self.userInteractionEnabled = true
+        }
+        
         
         let actionX = SKAction.moveToX(self.destX, duration: 0.5)
         let actionY = SKAction.moveToY(self.destY, duration: 0.5)
@@ -267,6 +280,7 @@ class GameScene: SKScene {
     // MARK: - UI Setup
     
     func updateSpriteColor(){
+        colorActive = true
         self.sprite.fillColor = colorArray[randomIndex()]
         newColorTime = NSDate.timeIntervalSinceReferenceDate()
     }
