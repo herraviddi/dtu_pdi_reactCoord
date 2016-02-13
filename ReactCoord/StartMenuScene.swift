@@ -49,6 +49,8 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
     
     override func didMoveToView(view: SKView) {
     
+        checkForUser()
+        
         nameTextField.frame = CGRectMake(50, size.height/2-200, size.width-100, 50)
         nameTextField.placeholder = "your name please"
         nameTextField.textColor = SKColor.blackColor()
@@ -141,6 +143,8 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
         if(touchedNode.name == "startgame"){
             if (username != "" && userSex != "" && ageTextField.text != "" ){
 
+                checkForUser()
+                
                 let beerScene = BeerCounter(size: size)
                 beerScene.scaleMode = scaleMode
                 let transitionType = SKTransition.flipHorizontalWithDuration(1.0)
@@ -153,10 +157,10 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
                 
                 startGameButton.hidden = true
                 
-                if !userExists{
+                if !self.userExists{
                     postData()
                 }else{
-                    checkForUser()
+
                 }
 
                 delay(1.0){
@@ -210,10 +214,10 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
             if let data = try? NSData(contentsOfURL: url, options: []) {
                 let json = JSON(data: data)
                 parseJSON(json)
-                userExists = true
+
             }
             else{
-                userExists = false
+                self.userExists = false
                 turnOnUserInput()
                 ageTextField.clearsOnBeginEditing = true
                 femaleButton.backgroundColor = SKColor.clearColor()
@@ -265,23 +269,18 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
             }
             
             if result.0 == "number_of_drinks" {
-                print(result.1)
-                print("beers")
-                
                 if (result.1 != nil){
                     self.numberOfDrinks = result.1.intValue
                     print(self.numberOfDrinks)
                 }else{
                     self.numberOfDrinks = 0
                 }
-
             }
+            self.userExists = true
 
             turnOffUserInput()
          }
-        
     }
-    
 
     func postData(){
         let parameters: [String : AnyObject] = [
@@ -295,6 +294,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
             // check if the result has a vales
             if let JSON = response.result.value{
                 if let userDict = JSON.valueForKey("user"){
+//                    print(userDict.valueForKey("id"))
                     self.userID = userDict.valueForKey("id") as! Int
                     print(self.userID)
                  }

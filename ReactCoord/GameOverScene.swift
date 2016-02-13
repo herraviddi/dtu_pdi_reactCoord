@@ -86,10 +86,7 @@ class GameOverScene: SKScene {
         playAgain.fontSize = 50
         playAgain.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)-320)
         self.addChild(playAgain)
-        
-        
-        
-   
+
     }
     
     func postData(){
@@ -98,11 +95,9 @@ class GameOverScene: SKScene {
                 "distance_from_centre": avgDistance,
                 "number_of_drinks": beerCount,
                 "reaction_time": avgReaction,
-            "user_id" : 4
-//                "user_id": (self.userData?.valueForKey("id"))!
+            "user_id" : (self.userData?.valueForKey("id"))!
         ]
 
-//        let values = [resultsDict]
         let url = NSURL(string: "https://group23api.herokuapp.com/api/result")
         
         let request = NSMutableURLRequest(URL: url!)

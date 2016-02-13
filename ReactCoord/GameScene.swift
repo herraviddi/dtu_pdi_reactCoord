@@ -10,10 +10,8 @@ import SpriteKit
 import CoreMotion
 
 class GameScene: SKScene {
-    
-    
+
     // MARK: - Properties
-    
     var gameOverBool = Bool()
     
     // sprite nodes properties
