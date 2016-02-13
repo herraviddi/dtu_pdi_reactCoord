@@ -90,6 +90,7 @@ class GameScene: SKScene {
     }
     
     func restart() {
+        self.motionManager.stopAccelerometerUpdates()
         self.sprite.removeFromParent()
         self.centerBall.removeFromParent()
         self.removeAllChildren()
