@@ -250,7 +250,7 @@ class StartMenuScene: SKScene , UITextFieldDelegate{
             if let data = try? NSData(contentsOfURL: url, options: []) {
                 let json = JSON(data: data)
                 parseJSON(json)
-                self.userExists = true
+//                self.userExists = true
 
             }
             else{
