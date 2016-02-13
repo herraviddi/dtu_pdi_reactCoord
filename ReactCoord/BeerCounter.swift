@@ -274,6 +274,7 @@ class BeerCounter: SKScene {
         startLabel.fontSize = 40
         startLabel.color = SKColor.blueColor()
         startLabel.name = "startLabel"
+        startLabel.hidden = true
         self.addChild(startLabel)
 
         
@@ -368,6 +369,7 @@ class BeerCounter: SKScene {
         }
         
         if(touchedNode.name == "startLabel"){
+            
             let gamescene = CountInGameScene(size: size)
             gamescene.scaleMode = scaleMode
             let transitionType = SKTransition.doorsOpenHorizontalWithDuration(1.0)
@@ -375,6 +377,13 @@ class BeerCounter: SKScene {
             self.userData?.setValue(beerCount, forKey: "number_of_drinks")
             gamescene.userData = self.userData
             view?.presentScene(gamescene, transition: transitionType)
+
+        }
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        if(beerCount != initialBeerCount){
+            startLabel.hidden = false
         }
     }
     
